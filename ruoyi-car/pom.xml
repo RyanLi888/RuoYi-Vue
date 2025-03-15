@@ -14,18 +14,10 @@
     <dependencies>
         <dependency>
             <groupId>com.ruoyi</groupId>
-            <artifactId>ruoyi-admin</artifactId>
+            <artifactId>ruoyi-common</artifactId>
             <version>${ruoyi.version}</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-devtools</artifactId>-->
-<!--            <scope>runtime</scope>-->
-<!--        </dependency>-->
-        <!--        <dependency>-->
-<!--            <groupId>com.ruoyi</groupId>-->
-<!--            <artifactId>ruoyi-system</artifactId>-->
-<!--        </dependency>-->
+
     </dependencies>
 
     <properties>
@@ -33,10 +25,6 @@
         <maven.compiler.target>23</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-<!--    &lt;!&ndash; 通用工具&ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>com.ruoyi</groupId>-->
-<!--            <artifactId>ruoyi-common</artifactId>-->
-<!--        </dependency>-->
+
 
 </project>
