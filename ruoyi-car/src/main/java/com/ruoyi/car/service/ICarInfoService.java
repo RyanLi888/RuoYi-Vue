@@ -69,10 +69,17 @@ public interface ICarInfoService
     public CarInfo selectCarInfoByVehicleNo(String vehicleNo);
 
     /**
+     * 新增车辆信息，检查车牌号是否包含特定字符串
+     *
+     * @param carInfo 车辆信息
+     * @return 结果
+     */
+    public int insertCarInfoWithCheck(CarInfo carInfo);
+    /**
      * 新增车辆信息，先检查车牌号是否存在
      *
      * @param carInfo 车辆信息
      * @return 结果
      */
-    public int insertCarInfoIfNotExists(CarInfo carInfo);
+//    public int insertCarInfoIfNotExists(CarInfo carInfo);
 }

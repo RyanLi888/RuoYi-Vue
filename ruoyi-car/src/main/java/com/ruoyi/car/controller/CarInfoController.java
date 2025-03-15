@@ -79,13 +79,14 @@ public class CarInfoController extends BaseController
     @Log(title = "车辆信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody CarInfo carInfo) {
-        int result = carInfoService.insertCarInfoIfNotExists(carInfo);
+        int result = carInfoService.insertCarInfoWithCheck(carInfo);
         if (result > 0) {
             return toAjax(result);
         } else {
-            return error("车牌号已存在，无法添加");
+            return error("车牌号不允许添加或已存在");
         }
     }
+
 //    @PreAuthorize("@ss.hasPermi('car:car:add')")
 //    @Log(title = "车辆信息", businessType = BusinessType.INSERT)
 //    @PostMapping
