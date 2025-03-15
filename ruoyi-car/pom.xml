@@ -12,11 +12,17 @@
     <artifactId>ruoyi-car</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-admin</artifactId>
+            <version>${ruoyi.version}</version>
+        </dependency>
 <!--        <dependency>-->
-<!--            <groupId>com.ruoyi</groupId>-->
-<!--            <artifactId>ruoyi-common</artifactId>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-devtools</artifactId>-->
+<!--            <scope>runtime</scope>-->
 <!--        </dependency>-->
-<!--        <dependency>-->
+        <!--        <dependency>-->
 <!--            <groupId>com.ruoyi</groupId>-->
 <!--            <artifactId>ruoyi-system</artifactId>-->
 <!--        </dependency>-->
