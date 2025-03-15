@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.car.mapper.CarInfoMapper">
+    
+    <resultMap type="CarInfo" id="CarInfoResult">
+        <result property="vehicleId"    column="vehicle_id"    />
+        <result property="vehicleNo"    column="vehicle_no"    />
+        <result property="vehicleColor"    column="vehicle_color"    />
+        <result property="vehicleType"    column="vehicle_type"    />
+        <result property="sim"    column="sim"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="deptName"    column="dept_name"    />
+        <result property="groupInfo"    column="group_info"    />
+        <result property="chnEnable"    column="chn_enable"    />
+        <result property="deleteFlag"    column="delete_flag"    />
+        <result property="onlineStatus"    column="online_status"    />
+        <result property="loginTime"    column="login_time"    />
+        <result property="totalMaintenance"    column="total_maintenance"    />
+        <result property="maintenance"    column="maintenance"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectCarInfoVo">
+        select vehicle_id, vehicle_no, vehicle_color, vehicle_type, sim, dept_id, dept_name, group_info, chn_enable, delete_flag, online_status, login_time, total_maintenance, maintenance, create_time, update_time from car_info
+    </sql>
+
+    <select id="selectCarInfoList" parameterType="CarInfo" resultMap="CarInfoResult">
+        <include refid="selectCarInfoVo"/>
+        <where>  
+            <if test="vehicleId != null "> and vehicle_id = #{vehicleId}</if>
+            <if test="vehicleNo != null  and vehicleNo != ''"> and vehicle_no = #{vehicleNo}</if>
+            <if test="sim != null  and sim != ''"> and sim = #{sim}</if>
+            <if test="deptName != null  and deptName != ''"> and dept_name like concat('%', #{deptName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCarInfoByVehicleId" parameterType="Long" resultMap="CarInfoResult">
+        <include refid="selectCarInfoVo"/>
+        where vehicle_id = #{vehicleId}
+    </select>
+
+    <insert id="insertCarInfo" parameterType="CarInfo" useGeneratedKeys="true" keyProperty="vehicleId">
+        insert into car_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="vehicleNo != null">vehicle_no,</if>
+            <if test="vehicleColor != null">vehicle_color,</if>
+            <if test="vehicleType != null">vehicle_type,</if>
+            <if test="sim != null">sim,</if>
+            <if test="deptId != null">dept_id,</if>
+            <if test="deptName != null">dept_name,</if>
+            <if test="groupInfo != null">group_info,</if>
+            <if test="chnEnable != null">chn_enable,</if>
+            <if test="deleteFlag != null">delete_flag,</if>
+            <if test="onlineStatus != null">online_status,</if>
+            <if test="loginTime != null">login_time,</if>
+            <if test="totalMaintenance != null">total_maintenance,</if>
+            <if test="maintenance != null">maintenance,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="vehicleNo != null">#{vehicleNo},</if>
+            <if test="vehicleColor != null">#{vehicleColor},</if>
+            <if test="vehicleType != null">#{vehicleType},</if>
+            <if test="sim != null">#{sim},</if>
+            <if test="deptId != null">#{deptId},</if>
+            <if test="deptName != null">#{deptName},</if>
+            <if test="groupInfo != null">#{groupInfo},</if>
+            <if test="chnEnable != null">#{chnEnable},</if>
+            <if test="deleteFlag != null">#{deleteFlag},</if>
+            <if test="onlineStatus != null">#{onlineStatus},</if>
+            <if test="loginTime != null">#{loginTime},</if>
+            <if test="totalMaintenance != null">#{totalMaintenance},</if>
+            <if test="maintenance != null">#{maintenance},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCarInfo" parameterType="CarInfo">
+        update car_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="vehicleNo != null">vehicle_no = #{vehicleNo},</if>
+            <if test="vehicleColor != null">vehicle_color = #{vehicleColor},</if>
+            <if test="vehicleType != null">vehicle_type = #{vehicleType},</if>
+            <if test="sim != null">sim = #{sim},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="deptName != null">dept_name = #{deptName},</if>
+            <if test="groupInfo != null">group_info = #{groupInfo},</if>
+            <if test="chnEnable != null">chn_enable = #{chnEnable},</if>
+            <if test="deleteFlag != null">delete_flag = #{deleteFlag},</if>
+            <if test="onlineStatus != null">online_status = #{onlineStatus},</if>
+            <if test="loginTime != null">login_time = #{loginTime},</if>
+            <if test="totalMaintenance != null">total_maintenance = #{totalMaintenance},</if>
+            <if test="maintenance != null">maintenance = #{maintenance},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where vehicle_id = #{vehicleId}
+    </update>
+
+    <delete id="deleteCarInfoByVehicleId" parameterType="Long">
+        delete from car_info where vehicle_id = #{vehicleId}
+    </delete>
+
+    <delete id="deleteCarInfoByVehicleIds" parameterType="String">
+        delete from car_info where vehicle_id in 
+        <foreach item="vehicleId" collection="array" open="(" separator="," close=")">
+            #{vehicleId}
+        </foreach>
+    </delete>
+</mapper>
