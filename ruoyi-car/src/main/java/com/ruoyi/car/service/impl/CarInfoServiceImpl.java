@@ -56,6 +56,22 @@ public class CarInfoServiceImpl implements ICarInfoService
         carInfo.setCreateTime(DateUtils.getNowDate());
         return carInfoMapper.insertCarInfo(carInfo);
     }
+    @Override
+    public CarInfo selectCarInfoByVehicleNo(String vehicleNo) {
+        return carInfoMapper.selectCarInfoByVehicleNo(vehicleNo);
+    }
+
+    @Override
+    public int insertCarInfoIfNotExists(CarInfo carInfo) {
+        CarInfo existingCar = selectCarInfoByVehicleNo(carInfo.getVehicleNo());
+        if (existingCar == null) {
+            carInfo.setCreateTime(DateUtils.getNowDate());
+            return carInfoMapper.insertCarInfo(carInfo);
+        }
+        return 0; // 车牌号已存在，不插入
+    }
+
+
 
     /**
      * 修改车辆信息

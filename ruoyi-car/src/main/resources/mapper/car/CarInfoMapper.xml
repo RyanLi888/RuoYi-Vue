@@ -36,6 +36,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="deptName != null  and deptName != ''"> and dept_name like concat('%', #{deptName}, '%')</if>
         </where>
     </select>
+
+    <select id="selectCarInfoByVehicleNo" parameterType="String" resultMap="CarInfoResult">
+        <include refid="selectCarInfoVo"/>
+        where vehicle_no = #{vehicleNo}
+    </select>
     
     <select id="selectCarInfoByVehicleId" parameterType="Long" resultMap="CarInfoResult">
         <include refid="selectCarInfoVo"/>
