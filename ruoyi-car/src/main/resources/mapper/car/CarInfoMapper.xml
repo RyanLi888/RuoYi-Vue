@@ -43,6 +43,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where vehicle_id = #{vehicleId}
     </select>
 
+    <!-- RuoYi-Vue/ruoyi-car/src/main/resources/mapper/car/CarInfoMapper.xml  查询车牌号-->
+    <select id="selectCarInfoByVehicleNo" parameterType="String" resultMap="CarInfoResult">
+        <include refid="selectCarInfoVo"/>
+        where vehicle_no = #{vehicleNo}
+    </select>
+
     <insert id="insertCarInfo" parameterType="CarInfo" useGeneratedKeys="true" keyProperty="vehicleId">
         insert into car_info
         <trim prefix="(" suffix=")" suffixOverrides=",">

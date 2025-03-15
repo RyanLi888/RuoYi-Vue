@@ -77,7 +77,12 @@ public class CarInfoController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody CarInfo carInfo)
     {
-        return toAjax(carInfoService.insertCarInfo(carInfo));
+        int result = carInfoService.insertCarInfoWithCheck(carInfo);
+        if (result > 0) {
+            return toAjax(result);
+        } else {
+            return error("车牌号不允许添加或已存在");
+        }
     }
 
     /**

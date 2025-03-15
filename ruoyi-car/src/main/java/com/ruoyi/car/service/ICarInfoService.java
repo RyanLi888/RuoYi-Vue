@@ -27,6 +27,24 @@ public interface ICarInfoService
      */
     public List<CarInfo> selectCarInfoList(CarInfo carInfo);
 
+
+    /**
+     * 根据车牌号查询车辆信息
+     *
+     * @param vehicleNo 车牌号
+     * @return 车辆信息
+     */
+    public CarInfo selectCarInfoByVehicleNo(String vehicleNo);
+
+    /**
+     * 新增车辆信息，检查车牌号是否包含特定字符串
+     *
+     * @param carInfo 车辆信息
+     * @return 结果
+     */
+    public int insertCarInfoWithCheck(CarInfo carInfo);
+
+
     /**
      * 新增车辆信息
      * 

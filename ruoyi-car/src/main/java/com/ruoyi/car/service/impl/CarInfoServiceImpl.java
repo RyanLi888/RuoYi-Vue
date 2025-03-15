@@ -45,6 +45,42 @@ public class CarInfoServiceImpl implements ICarInfoService
     }
 
     /**
+     * 根据车牌号查询车辆信息
+     *
+     * @param vehicleNo 车牌号
+     * @return
+     */
+    @Override
+    public CarInfo selectCarInfoByVehicleNo(String vehicleNo) {
+        return carInfoMapper.selectCarInfoByVehicleNo(vehicleNo);
+    }
+
+    /**
+     *      检查车牌号是否存在，存在不插入。
+     * @param carInfo 车辆信息
+     * @return
+     */
+    @Override
+    public int insertCarInfoWithCheck(CarInfo carInfo) {
+        String vehicleNo = carInfo.getVehicleNo();
+        // 定义不允许添加的车牌号包含的字符串
+        String[] restrictedStrings = {"MT001", "GN351", "Ht67"};
+        for (String restricted : restrictedStrings) {
+            if (vehicleNo != null && vehicleNo.contains(restricted)) {
+                return 0; // 车牌号包含不允许的字符串，不插入
+            }
+        }
+        // 检查车牌号是否已存在
+        CarInfo existingCar = selectCarInfoByVehicleNo(vehicleNo);
+        if (existingCar != null) {
+            return 0; // 车牌号已存在，不插入
+        }
+        carInfo.setCreateTime(DateUtils.getNowDate());
+        return carInfoMapper.insertCarInfo(carInfo);
+    }
+
+
+    /**
      * 新增车辆信息
      * 
      * @param carInfo 车辆信息
