@@ -18,6 +18,7 @@ public class CarInfo extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 车辆ID */
+    @Excel(name = "车辆ID")
     private Long vehicleId;
 
     /** 车牌号 */
@@ -37,19 +38,17 @@ public class CarInfo extends BaseEntity
     private String sim;
 
     /** 部门id */
-    @Excel(name = "部门id")
     private Long deptId;
 
     /** 车辆所属部门 */
     @Excel(name = "车辆所属部门")
     private String deptName;
 
-    /** 所属车组（字段名应为group，因与关键字冲突改为group_info） */
-    @Excel(name = "所属车组", readConverterExp = "字=段名应为group，因与关键字冲突改为group_info")
+    /** 所属车组 */
+    @Excel(name = "所属车组")
     private String groupInfo;
 
     /** 通道能使用的通道号列表 */
-    @Excel(name = "通道能使用的通道号列表")
     private String chnEnable;
 
     /** 是否删除标识 */
@@ -60,13 +59,13 @@ public class CarInfo extends BaseEntity
     @Excel(name = "联网状态")
     private Long onlineStatus;
 
-    /** 最近一次登录时间 */
+    /** 最近登录时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "最近一次登录时间", width = 30, dateFormat = "yyyy-MM-dd")
+    @Excel(name = "最近登录时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date loginTime;
 
-    /** 车辆总里程 */
-    @Excel(name = "车辆总里程")
+    /** 车辆里程 */
+    @Excel(name = "车辆里程")
     private Long totalMaintenance;
 
     /** 保养情况 */

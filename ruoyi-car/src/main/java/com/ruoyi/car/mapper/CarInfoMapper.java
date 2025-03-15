@@ -58,12 +58,4 @@ public interface CarInfoMapper
      * @return 结果
      */
     public int deleteCarInfoByVehicleIds(Long[] vehicleIds);
-
-    /**
-     * 根据车牌号查询车辆信息
-     *
-     * @param vehicleNo 车牌号
-     * @return 车辆信息
-     */
-    public CarInfo selectCarInfoByVehicleNo(String vehicleNo);
 }

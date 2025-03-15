@@ -1,14 +1,6 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="车辆ID" prop="vehicleId">
-        <el-input
-          v-model="queryParams.vehicleId"
-          placeholder="请输入车辆ID"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
       <el-form-item label="车牌号" prop="vehicleNo">
         <el-input
           v-model="queryParams.vehicleNo"
@@ -16,6 +8,24 @@
           clearable
           @keyup.enter.native="handleQuery"
         />
+      </el-form-item>
+      <el-form-item label="车辆颜色" prop="vehicleColor">
+        <el-input
+          v-model="queryParams.vehicleColor"
+          placeholder="请输入车辆颜色"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="车辆类型" prop="vehicleType">
+        <el-select v-model="queryParams.vehicleType" placeholder="请选择车辆类型" clearable>
+          <el-option
+            v-for="dict in dict.type.sys_car_type"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
+        </el-select>
       </el-form-item>
       <el-form-item label="手机号" prop="sim">
         <el-input
@@ -96,22 +106,20 @@
         </template>
       </el-table-column>
       <el-table-column label="手机号" align="center" prop="sim" />
-      <el-table-column label="部门id" align="center" prop="deptId" />
       <el-table-column label="车辆所属部门" align="center" prop="deptName" />
       <el-table-column label="所属车组" align="center" prop="groupInfo" />
-      <el-table-column label="通道能使用的通道号列表" align="center" prop="chnEnable" />
       <el-table-column label="是否删除标识" align="center" prop="deleteFlag" />
       <el-table-column label="联网状态" align="center" prop="onlineStatus">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.sys_car_status" :value="scope.row.onlineStatus"/>
         </template>
       </el-table-column>
-      <el-table-column label="最近一次登录时间" align="center" prop="loginTime" width="180">
+      <el-table-column label="最近登录时间" align="center" prop="loginTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.loginTime, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="车辆总里程" align="center" prop="totalMaintenance" />
+      <el-table-column label="车辆里程" align="center" prop="totalMaintenance" />
       <el-table-column label="保养情况" align="center" prop="maintenance">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.sys_car_maintenance" :value="scope.row.maintenance"/>
@@ -176,12 +184,6 @@
         <el-form-item label="所属车组" prop="groupInfo">
           <el-input v-model="form.groupInfo" placeholder="请输入所属车组" />
         </el-form-item>
-        <el-form-item label="通道能使用的通道号列表" prop="chnEnable">
-          <el-input v-model="form.chnEnable" placeholder="请输入通道能使用的通道号列表" />
-        </el-form-item>
-        <el-form-item label="是否删除标识" prop="deleteFlag">
-          <el-input v-model="form.deleteFlag" placeholder="请输入是否删除标识" />
-        </el-form-item>
         <el-form-item label="联网状态" prop="onlineStatus">
           <el-select v-model="form.onlineStatus" placeholder="请选择联网状态">
             <el-option
@@ -192,16 +194,16 @@
             ></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="最近一次登录时间" prop="loginTime">
+        <el-form-item label="最近登录时间" prop="loginTime">
           <el-date-picker clearable
             v-model="form.loginTime"
             type="date"
             value-format="yyyy-MM-dd"
-            placeholder="请选择最近一次登录时间">
+            placeholder="请选择最近登录时间">
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="车辆总里程" prop="totalMaintenance">
-          <el-input v-model="form.totalMaintenance" placeholder="请输入车辆总里程" />
+        <el-form-item label="车辆里程" prop="totalMaintenance">
+          <el-input v-model="form.totalMaintenance" placeholder="请输入车辆里程" />
         </el-form-item>
         <el-form-item label="保养情况" prop="maintenance">
           <el-radio-group v-model="form.maintenance">
@@ -251,8 +253,9 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
-        vehicleId: null,
         vehicleNo: null,
+        vehicleColor: null,
+        vehicleType: null,
         sim: null,
         deptName: null,
       },
@@ -260,6 +263,27 @@ export default {
       form: {},
       // 表单校验
       rules: {
+        vehicleNo: [
+          { required: true, message: "车牌号不能为空", trigger: "blur" }
+        ],
+        vehicleColor: [
+          { required: true, message: "车辆颜色不能为空", trigger: "blur" }
+        ],
+        vehicleType: [
+          { required: true, message: "车辆类型不能为空", trigger: "change" }
+        ],
+        sim: [
+          { required: true, message: "手机号不能为空", trigger: "blur" }
+        ],
+        deptName: [
+          { required: true, message: "车辆所属部门不能为空", trigger: "blur" }
+        ],
+        totalMaintenance: [
+          { required: true, message: "车辆里程不能为空", trigger: "blur" }
+        ],
+        createTime: [
+          { required: true, message: "创建时间不能为空", trigger: "blur" }
+        ],
       }
     };
   },
