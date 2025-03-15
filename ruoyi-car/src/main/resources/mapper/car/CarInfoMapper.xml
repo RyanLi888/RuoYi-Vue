@@ -35,6 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="vehicleType != null  and vehicleType != ''"> and vehicle_type = #{vehicleType}</if>
             <if test="sim != null  and sim != ''"> and sim = #{sim}</if>
             <if test="deptName != null  and deptName != ''"> and dept_name like concat('%', #{deptName}, '%')</if>
+            <if test="params.beginCreateTime != null and params.beginCreateTime != '' and params.endCreateTime != null and params.endCreateTime != ''"> and create_time between #{params.beginCreateTime} and #{params.endCreateTime}</if>
         </where>
     </select>
     

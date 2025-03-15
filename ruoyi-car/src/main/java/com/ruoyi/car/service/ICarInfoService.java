@@ -21,12 +21,19 @@ public interface ICarInfoService
 
     /**
      * 查询车辆信息列表
-     * 
+     *
      * @param carInfo 车辆信息
      * @return 车辆信息集合
      */
     public List<CarInfo> selectCarInfoList(CarInfo carInfo);
 
+//    /**
+//     * 根据条件分页查询车辆列表
+//     *
+//     * @param carInfo 车辆信息
+//     * @return 车辆信息集合信息
+//     */
+//    public List<CarInfo> selectUserList(CarInfo carInfo);
 
     /**
      * 根据车牌号查询车辆信息
